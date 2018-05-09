@@ -32,15 +32,27 @@ public class Utilizator {
 		return this.listaPrieteni;
 	}
 	
-	//metoda lui Andrei
-	//nu va atingeti de ea
+	public ArrayList<CererePrietenie> getListaCereri(){
+		return this.listaCereri;
+	}
+	
+	public void stergeCerere(CererePrietenie tinta) {
+		for (int i = 0; i < this.listaCereri.size(); i++) {
+			if (this.listaCereri.get(i).equals(tinta)) {
+				this.listaCereri.remove(i);
+			}
+		}
+	}
+	
+	//metoda Andrei Mitroi
 	public void raspunsCererePrietenie(CererePrietenie cerere, boolean raspuns) {
 		if (raspuns) {
 			cerere.expeditor.listaPrieteni.add(cerere.destinatar);
 			cerere.destinatar.listaPrieteni.add(cerere.expeditor);
+			this.stergeCerere(cerere);
 			
 		} else {
-			cerere = null;
+			this.stergeCerere(cerere);
 		}
 	}
 	

@@ -35,7 +35,7 @@ public class CererePrietenie {
 	}
 
 	public void trimiteCerere() {
-		this.expeditor.listaCereri.add(this);
+		this.destinatar.listaCereri.add(this);
 	}
 	
 	public void dispareCerere() {

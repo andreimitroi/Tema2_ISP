@@ -29,6 +29,7 @@ class TestRaspunsCererePrietenie {
 		radu.raspunsCererePrietenie(cerere, true);
 		assertTrue(radu.getUltimulPrieten().equals(andrei));
 		assertTrue(andrei.getUltimulPrieten().equals(radu));
+		assertEquals(radu.getListaCereri().size(), 0);
 	}
 	
 	@Test
@@ -66,6 +67,7 @@ class TestRaspunsCererePrietenie {
 		assertTrue(lista.get(1).equals(cristina));
 		assertTrue(andrei.getUltimulPrieten().equals(radu));
 		assertTrue(cristina.getUltimulPrieten().equals(radu));
+		assertEquals(radu.getListaCereri().size(), 0);
 	}
 
 	@Test
@@ -87,6 +89,7 @@ class TestRaspunsCererePrietenie {
 		ArrayList<Utilizator> lista = new ArrayList<Utilizator>(radu.getListaPrieteni());
 		assertEquals(lista.size(), 0);
 		assertEquals(andrei.getListaPrieteni().size(), 0);
+		assertEquals(radu.getListaCereri().size(), 0);
 	}
 	
 	@Test
@@ -124,5 +127,32 @@ class TestRaspunsCererePrietenie {
 		assertTrue(lista.get(0).equals(cristina));
 		assertTrue(cristina.getUltimulPrieten().equals(radu));
 		assertEquals(andrei.getListaPrieteni().size(), 0);
+		assertEquals(radu.getListaCereri().size(), 0);
+	}
+	
+	@Test
+	void testCereri() {
+		//creare utilizatori
+		Utilizator andrei = new Utilizator("Andrei");
+		Utilizator radu = new Utilizator("Radu");
+		Utilizator cristina = new Utilizator("Cristina");
+		
+		//creare cerere de prietenie 1
+		CererePrietenie cerere = CererePrietenie.getInstanta();
+		cerere.setDestinatar(radu);
+		cerere.setExpeditor(andrei);
+		
+		//trimiterea cererii 1
+		cerere.trimiteCerere();
+		
+		//creare cerere de prietenie 2
+		cerere = CererePrietenie.getInstanta();
+		cerere.setDestinatar(radu);
+		cerere.setExpeditor(cristina);
+		
+		//trimiterea cererii 2
+		cerere.trimiteCerere();
+		
+		assertEquals(radu.getListaCereri().size(), 2);
 	}
 }
